@@ -1,9 +1,12 @@
 package test;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.TreeMap;
 
 public class CheckForSingle {
@@ -21,7 +24,8 @@ public class CheckForSingle {
 			inputArr[i] = Integer.parseInt(inputStrArr[i]);
 		}
 				
-		int singleVal = findSingleVal(inputArr);
+		//int singleVal = findSingleVal(inputArr);
+		int singleVal = findSingleValSet(inputArr);
 		
 		if(singleVal <= 0)
 			System.out.println("Invalid input. Please try again.");
@@ -60,23 +64,35 @@ public class CheckForSingle {
 		}
 		
 		return -1;
-//		int count = 1;
-//		int starter = 0;
-//		for(int i = 0; i < input.length; i++) {
-//			starter = input[i];
-//			System.out.println(starter);
-//			for(int j = i + 1; j < input.length; j++) {
-//				if(starter == input[j]) {
-//					count++;
-//					System.out.println(count);
-//				}
-//			}
-//			if(count == 1) {
-//				return starter;
-//			}
-//		}
-//		
-//		return -1;
+		
+	}
+	public static int findSingleValSet(int[] input) {
+		
+		int arrSum = 0;
+		Set<Integer> numSet = new HashSet<Integer>();
+		
+		
+		for(int i = 0; i < input.length; i++) {
+			arrSum += input[i];
+			numSet.add(new Integer(input[i]));
+		}
+		
+		
+		if(numSet.isEmpty())
+			return -1;
+		
+		int setSum = 0;
+		Iterator<Integer> setIt = numSet.iterator();
+		while(setIt.hasNext()) {
+			setSum += setIt.next();
+		}
+				
+		for(int i = 0; i < input.length; i++) {
+			if((setSum * 2 - arrSum) == input[i])
+				return input[i];
+		}
+		
+		return -1;
 		
 	}
 }
