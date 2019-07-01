@@ -18,6 +18,8 @@ public class CheckForSingle {
 				
 		inputStr = inputStr.substring(1, inputStr.length() - 1);
 		String[] inputStrArr = inputStr.split(", ");
+	
+		
 		int[] inputArr = new int[inputStrArr.length];
 		
 		for(int i = 0; i < inputStrArr.length; i++) {
@@ -27,7 +29,7 @@ public class CheckForSingle {
 		//int singleVal = findSingleVal(inputArr);
 		int singleVal = findSingleValSet(inputArr);
 		
-		if(singleVal <= 0)
+		if(singleVal < 0)
 			System.out.println("Invalid input. Please try again.");
 		else
 			System.out.println("Value is " + singleVal);
@@ -87,12 +89,7 @@ public class CheckForSingle {
 			setSum += setIt.next();
 		}
 				
-		for(int i = 0; i < input.length; i++) {
-			if((setSum * 2 - arrSum) == input[i])
-				return input[i];
-		}
-		
-		return -1;
+		return setSum * 2 - arrSum;
 		
 	}
 }
